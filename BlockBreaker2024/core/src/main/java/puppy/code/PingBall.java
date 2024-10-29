@@ -9,12 +9,14 @@ public class PingBall extends GameObject implements Collidable{
     private double direction; // Dirección en grados (0-360)
     private Color color = Color.WHITE;
     private boolean estaQuieto;
+    private SoundEffectManager soundManager;
 
     public PingBall(int x, int y, int size, double speed, double direction, boolean iniciaQuieto) {
         super(x, y, size, size); // size ahora es ancho y alto de la pelota
         this.speed = speed;
         this.direction = direction; // Inicializa la dirección
         estaQuieto = iniciaQuieto;
+        soundManager = new SoundEffectManager();
     }
     
     //verificar si esta quieto
@@ -47,6 +49,7 @@ public class PingBall extends GameObject implements Collidable{
     @Override
     public void onCollision(GameObject obj) {
     	if (obj instanceof Paddle) {
+    		soundManager.playPaddleCollisionSound();
             // Cambia la dirección de la bola de forma aleatoria
             double randomAngle = (Math.random() * 90); // Ángulo aleatorio
             direction = (direction + randomAngle) % 360; // Ajusta la dirección y asegura que esté en el rango [0, 360]
@@ -55,6 +58,7 @@ public class PingBall extends GameObject implements Collidable{
             }
             color = Color.GREEN; // Cambia el color para indicar la colisión con el paddle
         } else if (obj instanceof Block) {
+        	soundManager.playBlockCollisionSound();
             direction = -direction; // Rebote vertical al chocar con el bloque
             color = Color.RED; // Cambia el color para indicar la colisión con un bloque
             //obj.destroyed = true; // Marca el bloque como destruido

@@ -24,6 +24,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private int vidas;
 	private int puntaje;
 	private int nivel;
+	private SoundEffectManager soundManager;
     
 		@Override
 		public void create () {	
@@ -40,6 +41,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    paddle = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 		    vidas = 3;
 		    puntaje = 0;    
+		    soundManager = new SoundEffectManager();
 		}
 		public void crearBloques(int filas) {
 			blocks.clear();
@@ -86,6 +88,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        }
 	        // verificar game over
 	        if (vidas<=0) {
+	        	soundManager.playGameOversound();
 	        	resetGame();   	
 	        }
 	        // verificar si el nivel se terminó
