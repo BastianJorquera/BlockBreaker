@@ -6,33 +6,23 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Paddle extends GameObject {
-    /*private int x = 20;
-    private int y = 20;
-    private int width = 100;
-    private int height = 10;
-    */
     public Paddle(int x, int y, int width, int height) {
     	super(x, y, width, height);
     }
     
-    /*
-    public int getX() {return x;}
-	public int getY() {return y;}
-	public int getWidth() {return width;}
-	public int getHeight() {return height;}
-	*/
-
+    //dibujar plataforma y actualizar su posicion segun las teclas presionadas
 	public void draw(ShapeRenderer shape){
 		shape.setColor(Color.BLUE);
         int newX = x;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) newX = x - 15;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) newX = x + 15;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) newX = x - 15; //mover plataforma a la izquierda
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) newX = x + 15;//mover plataforma a la derecha
 
-        if (newX > 0 && newX + width < Gdx.graphics.getWidth()) {
+        //evitar que la platforma no se salga de la pantalla
+        if (newX > 0 && newX + width < Gdx.graphics.getWidth()) { 
             x = newX;
         }
-        shape.rect(x, y, width, height);
+        shape.rect(x, y, width, height); //dibuja paddle en la nuevo posicion
     }
     
     

@@ -11,17 +11,17 @@ public class Block extends GameObject implements Collidable {
     boolean destroyed;
     
     public Block(int x, int y, int width, int height) {
-    	super(x, y, width, height); //constructor de clase super
+    	super(x, y, width, height); //constructor de clase padre
     	
-        destroyed = false;
-        Random r = new Random(x+y);
+        destroyed = false; 
+        Random r = new Random(x+y); //usa semilla aleatoria para elegir color del bloque
         
         cc = new Color(0.1f+r.nextFloat(), r.nextFloat(), r.nextFloat(), 1);
   
     }
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
-        shape.rect(x, y, width, height);
+        shape.rect(x, y, width, height); //dibuja el rectangulo
     }
     
     public boolean collidesWith(GameObject obj) {
@@ -29,7 +29,7 @@ public class Block extends GameObject implements Collidable {
     	//colision con blocke
     	boolean intersectsX = (obj.x + obj.width >= x) && (obj.x <= x + width);
         boolean intersectsY = (obj.y + obj.height >= y) && (obj.y <= y + height);
-        return intersectsX && intersectsY;
+        return intersectsX && intersectsY; //retorna verdadero si hay colision
     }
         
     public void onCollision(GameObject obj) {

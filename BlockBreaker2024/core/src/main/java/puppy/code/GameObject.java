@@ -2,8 +2,9 @@ package puppy.code;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+//base para todos los objetos del juego
 public abstract class GameObject{
-	protected int x, y, width, height;
+	protected int x, y, width, height; // posicion y dimenciones del objeto
 	
 	public GameObject(int x, int y, int width, int height) {
 		this.x = x;
@@ -12,7 +13,7 @@ public abstract class GameObject{
 		this.height = height;
 	}
 	
-	public abstract void draw(ShapeRenderer shape);
+	public abstract void draw(ShapeRenderer shape); //metodo para que cada subclase tenga su metodo para dibujarse
 	
 	// Getters y Setters
     public int getX() {

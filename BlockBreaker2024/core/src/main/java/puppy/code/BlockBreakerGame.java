@@ -14,20 +14,21 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
 public class BlockBreakerGame extends ApplicationAdapter {
-    private OrthographicCamera camera;
-	private SpriteBatch batch;	   
-	private BitmapFont font;
-	private ShapeRenderer shape;
-	private PingBall ball;
-	private Paddle paddle;
-	private ArrayList<Block> blocks = new ArrayList<>();
-	private int vidas;
-	private int puntaje;
-	private int nivel;
-	private SoundEffectManager soundManager;
+	private OrthographicCamera camera;    // Camara para vista 2D
+    private SpriteBatch batch;            // Batch para dibujar textos y sprites
+    private BitmapFont font;              // Fuente para mostrar puntuación y vidas
+    private ShapeRenderer shape;          // Renderer para dibujar formas basicas
+    private PingBall ball;
+    private Paddle paddle;
+    private ArrayList<Block> blocks = new ArrayList<>(); // Lista de bloques a romper
+    private int vidas;
+    private int puntaje;
+    private int nivel;
+    private SoundEffectManager soundManager; // Administrador de efectos de sonido
     
 		@Override
 		public void create () {	
+			// Configuracion inicial de la camara, batch, fuente y otros objetos
 			camera = new OrthographicCamera();
 		    camera.setToOrtho(false, 800, 480);
 		    batch = new SpriteBatch();
@@ -37,11 +38,11 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    crearBloques(2+nivel);
 			
 		    shape = new ShapeRenderer();
-		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 6, 90, true);
-		    paddle = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
+		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 6, 90, true); //crea pelota
+		    paddle = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10); //crea el paddle
 		    vidas = 3;
 		    puntaje = 0;    
-		    soundManager = new SoundEffectManager();
+		    soundManager = new SoundEffectManager(); //inicializa efectos de sonido
 		}
 		public void crearBloques(int filas) {
 			blocks.clear();
@@ -69,9 +70,9 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		
 		@Override
 		public void render () {
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		 //limpia la pantalla
 	        shape.begin(ShapeRenderer.ShapeType.Filled);
-	        paddle.draw(shape);
+	        paddle.draw(shape);   
 	        // monitorear inicio del juego
 	        if (ball.estaQuieto()) {
 	        	ball.setXY(paddle.getX()+paddle.getWidth()/2-5, paddle.getY()+paddle.getHeight()+11);
@@ -130,6 +131,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		
 		@Override
 		public void dispose () {
+			//libera recursos
 			batch.dispose();
 	        font.dispose();
 	        shape.dispose();

@@ -8,6 +8,7 @@ public class SoundEffectManager {
     private Sound paddleCollisionSound;
     private Sound gameOverSound;
 
+    //constructor
     public SoundEffectManager() {
         blockCollisionSound = Gdx.audio.newSound(Gdx.files.internal("block_collision.mp3"));
         paddleCollisionSound = Gdx.audio.newSound(Gdx.files.internal("paddle_collision.mp3"));
@@ -25,7 +26,8 @@ public class SoundEffectManager {
     public void playGameOversound() {
     	gameOverSound.play();
     }
-
+    
+    //libera recursos
     public void dispose() {
         blockCollisionSound.dispose();
         paddleCollisionSound.dispose();
