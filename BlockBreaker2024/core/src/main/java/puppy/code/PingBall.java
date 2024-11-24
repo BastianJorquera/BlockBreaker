@@ -86,8 +86,6 @@ public class PingBall extends GameObject implements Collidable{
             // Cambia color de la pelota
             color = Color.RED;
 
-            // Incrementa velocidad tras un rebote
-            speed += 0.05f;
         }
 
         // Asegura que la dirección no sea perfectamente vertical
