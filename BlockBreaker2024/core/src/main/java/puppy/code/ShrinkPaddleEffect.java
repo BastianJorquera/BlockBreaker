@@ -3,9 +3,12 @@ package puppy.code;
 import com.badlogic.gdx.utils.Timer;
 
 public class ShrinkPaddleEffect implements BlockEffect{
+	
 	public void applyEffect(PingBall ball, Paddle paddle) {
+		
 		float originalWidth = paddle.getWidth();
-        paddle.setWidth(paddle.getWidth() * 0.8f); // Reduce el tamaño en un 20%
+        paddle.setWidth(paddle.getWidth() * 1.3f); // Aumenta el tamaño en un 30%
+        GameScreen.setEffectMessage("¡Efecto Aplicado: Increase Paddle!");
         
         //revertir luego de cierto tiempo
         Timer.schedule(new Timer.Task() {;

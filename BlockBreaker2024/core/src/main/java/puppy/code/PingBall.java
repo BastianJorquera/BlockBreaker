@@ -57,19 +57,44 @@ public class PingBall extends GameObject implements Collidable{
     @Override
     public void onCollision(GameObject obj) {
     	if (obj instanceof Paddle) {
-    		soundManager.playPaddleCollisionSound();
-            // Cambia la dirección de la bola de forma aleatoria
-            double randomAngle = (Math.random() * 90); // Ángulo aleatorio
-            direction = (direction + randomAngle) % 360; // Ajusta la dirección y asegura que esté en el rango [0, 360]
-            if (direction > 180 || direction < 0) {
-            	direction-= 180; //mantiene direccion hacia arriba
-            }
-            color = Color.GREEN; // Cambia el color para indicar la colisión con el paddle
+            soundManager.playPaddleCollisionSound();
+
+            // Impacto relativo en el Paddle
+            float paddleCenterX = obj.getX() + obj.getWidth() / 2;
+            float impactRelative = (getX() - paddleCenterX) / (obj.getWidth() / 2);
+            float maxBounceAngle = 75; // Ángulo máximo de rebote
+            float bounceAngle = impactRelative * maxBounceAngle;
+            direction = 90 - bounceAngle;
+
+            // Cambia color de la pelota
+            color = Color.GREEN;
+
         } else if (obj instanceof Block) {
-        	soundManager.playBlockCollisionSound();
-            direction = -direction; // Rebote vertical al chocar con el bloque
-            color = Color.RED; // Cambia el color para indicar la colisión con un bloque
-            //obj.destroyed = true; // Marca el bloque como destruido
+            soundManager.playBlockCollisionSound();
+
+            // Determinar lado de impacto
+            if (getY() > obj.getY() + obj.getHeight()) {
+                direction = -Math.abs(direction); // Rebote hacia arriba
+            } else if (getY() + getHeight() < obj.getY()) {
+                direction = Math.abs(direction); // Rebote hacia abajo
+            } else if (getX() + getWidth() < obj.getX()) {
+                direction = 180 - direction; // Rebote desde la izquierda
+            } else {
+                direction = 180 - direction; // Rebote desde la derecha
+            }
+
+            // Cambia color de la pelota
+            color = Color.RED;
+
+            // Incrementa velocidad tras un rebote
+            speed += 0.05f;
+        }
+
+        // Asegura que la dirección no sea perfectamente vertical
+        if (direction > 85 && direction < 95) {
+            direction = 85;
+        } else if (direction > 265 && direction < 275) {
+            direction = 275;
         }
     }
 
