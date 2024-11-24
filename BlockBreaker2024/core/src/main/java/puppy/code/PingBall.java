@@ -15,8 +15,8 @@ public class PingBall extends GameObject implements Collidable{
         super(x, y, size, size); // size ahora es ancho y alto de la pelota
         this.speed = speed;
         this.direction = direction; // Inicializa la dirección
-        estaQuieto = iniciaQuieto;
-        soundManager = new SoundEffectManager();
+        this.estaQuieto = iniciaQuieto;
+        this.soundManager = SoundEffectManager.getInstance(); //usa instancia Singleton
     }
     
     //verificar si esta quieto
