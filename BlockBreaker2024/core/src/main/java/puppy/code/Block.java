@@ -9,15 +9,16 @@ import java.util.Random;
 public class Block extends GameObject implements Collidable {
     Color cc;
     boolean destroyed;
+    private BlockEffect effect; //nuevo atributo para efectos
     
-    public Block(int x, int y, int width, int height) {
+    public Block(float x, float y, float width, float height, BlockEffect effect) {
     	super(x, y, width, height); //constructor de clase super
     	
         destroyed = false;
-        Random r = new Random(x+y);
+        Random r = new Random((long) (x+y));
         
         cc = new Color(0.1f+r.nextFloat(), r.nextFloat(), r.nextFloat(), 1);
-  
+        this.effect = effect;
     }
     public void draw(ShapeRenderer shape){
     	shape.setColor(cc);
@@ -32,10 +33,16 @@ public class Block extends GameObject implements Collidable {
         return intersectsX && intersectsY;
     }
         
-    public void onCollision(GameObject obj) {
-        if (obj instanceof PingBall) {
+    public void onCollision(GameObject obj1, GameObject obj2) {
+        if (obj1 instanceof PingBall) {
             destroyed = true; // Bloque se marca como destruido al colisionar con la bola
+            if(effect != null) {
+            	effect.applyEffect((PingBall)obj1, (Paddle)obj2);
+            }
         }
     }
-    
+	@Override
+	public void onCollision(GameObject obj) {
+		
+	}
 }

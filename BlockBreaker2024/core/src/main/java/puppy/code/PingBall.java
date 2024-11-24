@@ -11,7 +11,7 @@ public class PingBall extends GameObject implements Collidable{
     private boolean estaQuieto;
     private SoundEffectManager soundManager;
 
-    public PingBall(int x, int y, int size, double speed, double direction, boolean iniciaQuieto) {
+    public PingBall(float x, float y, float size, double speed, double direction, boolean iniciaQuieto) {
         super(x, y, size, size); // size ahora es ancho y alto de la pelota
         this.speed = speed;
         this.direction = direction; // Inicializa la dirección
@@ -25,7 +25,7 @@ public class PingBall extends GameObject implements Collidable{
     }
     
     //actualizar posicion X e Y
-    public void setXY (int newX, int newY) {
+    public void setXY (float newX, float newY) {
     	this.x = newX;
     	this.y = newY;
     }
@@ -37,6 +37,14 @@ public class PingBall extends GameObject implements Collidable{
     public void draw(ShapeRenderer shape) {
         shape.setColor(color);
         shape.circle(x, y, width / 2); //width es ahora el radio por lo que eran 2 datos, se parte por 2
+    }
+    
+    public void setSpeed(double speed) {
+    	this.speed=speed;
+    }
+    
+    public double getSpeed() {
+    	return speed;
     }
 
 

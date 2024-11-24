@@ -1,8 +1,6 @@
 package puppy.code;
 
 import java.util.ArrayList;
-
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,7 +9,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 
 public class BlockBreakerGame extends ApplicationAdapter {
     private OrthographicCamera camera;
@@ -48,13 +45,28 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			int blockWidth = 70;
 		    int blockHeight = 26;
 		    int y = Gdx.graphics.getHeight();
+		    
+		    BlockFactory noEffectFactory = new NoEffectBlockFactory();
+		    BlockFactory randomEffectFactory = new RandomEffectBlockFactory();
+		    
+		    
 		    for (int cont = 0; cont<filas; cont++ ) {
 		    	y -= blockHeight+10;
 		    	for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
-		            blocks.add(new Block(x, y, blockWidth, blockHeight));
+		    		Block block;
+		    		if (Math.random() < 0.7) {
+		    			block= noEffectFactory.createBlock(x,y, blockWidth, blockHeight);
+		    		}
+		    		else {
+		    			block = randomEffectFactory.createBlock(x,y,blockWidth, blockHeight);
+		    		}
+		    		
+		    		blocks.add(block);
 		        }
 		    }
 		}
+		
+		
 		public void dibujaTextos() {
 			//actualizar matrices de la cámara
 			camera.update();
@@ -102,7 +114,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	            block.draw(shape);
 	            if (ball.collidesWith(block)) {
 	                ball.onCollision(block);
-	                block.onCollision(ball);
+	                block.onCollision(ball, paddle);
 	                if (block.destroyed) {
 	                    puntaje++;
 	                }

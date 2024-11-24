@@ -3,9 +3,9 @@ package puppy.code;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public abstract class GameObject{
-	protected int x, y, width, height;
+	protected float x, y, width, height;
 	
-	public GameObject(int x, int y, int width, int height) {
+	public GameObject(float x, float y, float width, float height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -15,35 +15,35 @@ public abstract class GameObject{
 	public abstract void draw(ShapeRenderer shape);
 	
 	// Getters y Setters
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 }
