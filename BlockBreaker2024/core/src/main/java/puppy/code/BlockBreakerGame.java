@@ -38,7 +38,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    paddle = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 		    vidas = 3;
 		    puntaje = 0;    
-		    soundManager = new SoundEffectManager();
+		    soundManager = SoundEffectManager.getInstance(); // usa instancia Singleton
 		}
 		public void crearBloques(int filas) {
 			blocks.clear();
