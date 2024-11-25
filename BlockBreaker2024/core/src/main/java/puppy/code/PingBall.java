@@ -34,7 +34,7 @@ public class PingBall extends GameObject implements Collidable{
     	this.estaQuieto = estado;
     }
     
-    public void draw(ShapeRenderer shape) {
+    protected void draw(ShapeRenderer shape) {
         shape.setColor(color);
         shape.circle(x, y, width / 2); //width es ahora el radio por lo que eran 2 datos, se parte por 2
     }
@@ -96,7 +96,7 @@ public class PingBall extends GameObject implements Collidable{
         }
     }
 
-    public void update() {
+    protected void update() {
         if (estaQuieto) return;
 
         int xSpeed = (int) (speed * Math.cos(Math.toRadians(direction)));

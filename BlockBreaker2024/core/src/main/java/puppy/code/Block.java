@@ -25,6 +25,10 @@ public class Block extends GameObject implements Collidable {
         shape.rect(x, y, width, height);
     }
     
+    public void update() {
+    	//aun no se usa
+    }
+    
     public boolean collidesWith(GameObject obj) {
     	
     	//colision con blocke
