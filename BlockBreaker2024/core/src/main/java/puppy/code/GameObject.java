@@ -12,7 +12,16 @@ public abstract class GameObject{
 		this.height = height;
 	}
 	
-	public abstract void draw(ShapeRenderer shape);
+	//secuencia Template Method
+	public void performActions(ShapeRenderer shape) {
+		update();
+		draw(shape);
+	}
+	
+	//metodos que deben usar las clases hijas
+	protected abstract void update();
+	protected abstract void draw(ShapeRenderer shape);
+	
 	
 	// Getters y Setters
     public float getX() {

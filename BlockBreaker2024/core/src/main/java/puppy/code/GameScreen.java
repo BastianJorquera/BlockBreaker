@@ -176,6 +176,7 @@ public class GameScreen implements Screen{
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 		
 	        shape.begin(ShapeRenderer.ShapeType.Filled);
 	        paddle.draw(shape);
+	        paddle.update();
 	        // monitorear inicio del juego
 	        if (ball.estaQuieto()) {
 	        	ball.setXY(paddle.getX()+paddle.getWidth()/2-5, paddle.getY()+paddle.getHeight()+11);

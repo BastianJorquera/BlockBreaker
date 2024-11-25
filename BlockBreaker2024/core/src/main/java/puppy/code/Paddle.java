@@ -21,17 +21,18 @@ public class Paddle extends GameObject {
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
 	*/
-
-	public void draw(ShapeRenderer shape){
-		shape.setColor(Color.BLUE);
-		float newX = x;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) newX = x - 15;
+    public void update() {
+    	float newX = x;
+    	if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) newX = x - 15;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) newX = x + 15;
-
+        
         if (newX > 0 && newX + width < Gdx.graphics.getWidth()) {
             x = newX;
         }
+    }
+
+	public void draw(ShapeRenderer shape){
+		shape.setColor(Color.BLUE);        
         shape.rect(x, y, width, height);
     }
     
